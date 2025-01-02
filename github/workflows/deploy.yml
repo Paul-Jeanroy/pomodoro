@@ -10,27 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Étape 1 : Récupérer le code
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    # Étape 2 : Configurer SSH
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+    # Étape 3 : Déployer sur le VPS
     - name: Deploy to VPS
       run: |
-        ssh -o StrictHostKeyChecking=no root@your-vps-ip << 'EOF'
-          # Navigate to project directory
+        ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} << 'EOF'
+          # Aller dans le dossier du projet
           cd /var/www/pomodoro
 
-          # Pull the latest changes
+          # Récupérer les dernières modifications
           git pull origin main
 
-          # Install dependencies and rebuild the project
+          # Installer les dépendances et reconstruire le projet
           npm install
           npm run build
 
-          # Restart the application with PM2
+          # Redémarrer l'application avec PM2
           pm2 restart pomodoro || pm2 start npm --name "pomodoro" -- start
         EOF
