@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-
 type TimerMode = "WORK" | "SHORT_BREAK" | "LONG_BREAK";
 
 const PomodoroTimer = () => {
