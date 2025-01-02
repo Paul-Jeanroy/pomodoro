@@ -84,6 +84,7 @@ const PomodoroTimer = () => {
         setIsRunning(false);
     };
 
+    
     return (
         <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 via-zinc-900 to-black h-screen w-screen">
             <div className="flex flex-col items-center justify-center h-full w-full p-4 z-10">
