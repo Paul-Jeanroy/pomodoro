@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 type TimerMode = "WORK" | "SHORT_BREAK" | "LONG_BREAK";
 
 const PomodoroTimer = () => {
-    const [timeLeft, setTimeLeft] = useState(25 * 60); // Valeur par défaut
+    const [i_time_left, setTimeLeft] = useState(25 * 60);
     const [isRunning, setIsRunning] = useState(false);
-    const [mode, setMode] = useState<TimerMode>("WORK");
+    const [w_mode, setMode] = useState<TimerMode>("WORK");
 
     const durations = {
         WORK: 25 * 60,
@@ -30,11 +30,11 @@ const PomodoroTimer = () => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            localStorage.setItem("pomodoro-timeLeft", timeLeft.toString());
+            localStorage.setItem("pomodoro-timeLeft", i_time_left.toString());
             localStorage.setItem("pomodoro-isRunning", isRunning.toString());
-            localStorage.setItem("pomodoro-mode", mode);
+            localStorage.setItem("pomodoro-mode", w_mode);
         }
-    }, [timeLeft, isRunning, mode]);
+    }, [i_time_left, isRunning, w_mode]);
 
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null;
@@ -58,20 +58,31 @@ const PomodoroTimer = () => {
         };
     }, [isRunning]);
 
-    const formatTime = (seconds: number) => {
+    useEffect(() => {
+        // Mettre à jour le titre de l'onglet
+        const formatTime = (seconds: number) => {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+        };
+
+        document.title = `${formatTime(i_time_left)} - Pomodoro Timer (${w_mode})`;
+    }, [i_time_left, w_mode]);
+
+    const sp_format_time = (seconds: number) => {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
     };
 
-    const handleModeChange = (newMode: TimerMode, duration: number) => {
+    const sp_change_mode = (newMode: TimerMode, duration: number) => {
         setMode(newMode);
         setTimeLeft(duration);
         setIsRunning(false);
     };
 
-    const resetTimer = () => {
-        setTimeLeft(durations[mode]);
+    const sp_reset_timer = () => {
+        setTimeLeft(durations[w_mode]);
         setIsRunning(false);
     };
 
@@ -82,9 +93,9 @@ const PomodoroTimer = () => {
                     {["WORK", "SHORT_BREAK", "LONG_BREAK"].map((m) => (
                         <div
                             key={m}
-                            onClick={() => handleModeChange(m as TimerMode, durations[m as TimerMode])}
+                            onClick={() => sp_change_mode(m as TimerMode, durations[m as TimerMode])}
                             className={`${
-                                mode === m ? "bg-purple-800 text-white" : "bg-white/90 text-black/90"
+                                w_mode === m ? "bg-purple-800 text-white" : "bg-white/90 text-black/90"
                             } min-w-[150px] sm:min-w-auto text-center rounded-full py-2 px-4 sm:px-6 text-sm sm:text-md font-bold shadow-lg border border-white/90 hover:bg-transparent hover:text-white/90 transition-all duration-500 cursor-pointer`}
                         >
                             {m.replace("_", " ")}
@@ -92,13 +103,13 @@ const PomodoroTimer = () => {
                     ))}
                 </div>
                 <h1 className="text-white/90 text-[100px] sm:text-[200px] md:text-[240px] lg:text-[360px] font-bold my-6 sm:my-8 lg:my-10">
-                    {formatTime(timeLeft)}
+                    {sp_format_time(i_time_left)}
                 </h1>
                 <div className="flex flex-col gap-5 sm:flex-row sm:gap-10">
                     <div className="flex items-center justify-center text-white/90 text-xl sm:text-2xl font-bold text-center">
-                        {mode === "WORK" && <div>It&apos;s time to work</div>}
-                        {mode === "SHORT_BREAK" && <div>It&apos;s time to take a short break</div>}
-                        {mode === "LONG_BREAK" && <div>It&apos;s time to take a long break</div>}
+                        {w_mode === "WORK" && <div>It&apos;s time to work</div>}
+                        {w_mode === "SHORT_BREAK" && <div>It&apos;s time to take a short break</div>}
+                        {w_mode === "LONG_BREAK" && <div>It&apos;s time to take a long break</div>}
                     </div>
                     <div className="flex items-center justify-center gap-4 sm:gap-6">
                         {isRunning ? (
@@ -117,7 +128,7 @@ const PomodoroTimer = () => {
                             </Button>
                         )}
                         <Button
-                            onClick={resetTimer}
+                            onClick={sp_reset_timer}
                             className="bg-yellow-500 text-white rounded-full w-20 sm:w-24 h-16 sm:h-20 text-lg sm:text-2xl font-bold shadow-lg border border-yellow-500 hover:bg-transparent hover:text-yellow-500 transition-all duration-500"
                         >
                             Restart

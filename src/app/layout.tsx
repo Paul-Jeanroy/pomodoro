@@ -56,6 +56,9 @@ export const metadata: Metadata = {
     alternates: {
         canonical: "https://pomodoro.paul-jeanroy.fr",
     },
+    icons: {
+        icon: "/pomodoro.webp",
+    },
 };
 
 export default function RootLayout({
