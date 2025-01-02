@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://pomodoro.paul-jeanroy.fr
+
+# Sitemaps
+Sitemap: https://pomodoro.paul-jeanroy.fr/sitemap.xml
