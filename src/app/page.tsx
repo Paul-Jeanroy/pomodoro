@@ -83,6 +83,7 @@ const PomodoroTimer = () => {
         setTimeLeft(durations[w_mode]);
         setIsRunning(false);
     };
+    
 
     return (
         <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 via-zinc-900 to-black h-screen w-screen">
