@@ -59,7 +59,6 @@ const PomodoroTimer = () => {
     }, [isRunning]);
 
     useEffect(() => {
-        // Mettre à jour le titre de l'onglet
         const formatTime = (seconds: number) => {
             const mins = Math.floor(seconds / 60);
             const secs = seconds % 60;
