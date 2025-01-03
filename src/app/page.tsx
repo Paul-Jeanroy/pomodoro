@@ -10,15 +10,20 @@ const PomodoroTimer = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [w_mode, setMode] = useState<TimerMode>("WORK");
     const [showExtend, setShowExtend] = useState(false);
+    const [alertSound, setAlertSound] = useState<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const sound = new Audio("/sound-end.mp3");
+            setAlertSound(sound);
+        }
+    }, []);
 
     const durations = {
         WORK: 1 * 60,
         SHORT_BREAK: 5 * 60,
         LONG_BREAK: 15 * 60,
     };
-
-    // Load the audio file
-    const alertSound = new Audio("/sound-end.mp3");
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -52,7 +57,7 @@ const PomodoroTimer = () => {
                         clearInterval(timer!);
                         setIsRunning(false);
                         setShowExtend(w_mode === "WORK");
-                        alertSound.play();
+                        if (alertSound) alertSound.play();
                         return 0;
                     }
                 });
@@ -62,7 +67,7 @@ const PomodoroTimer = () => {
         return () => {
             if (timer) clearInterval(timer);
         };
-    }, [isRunning, w_mode]);
+    }, [isRunning, w_mode, alertSound]);
 
     useEffect(() => {
         const formatTime = (seconds: number) => {
@@ -135,6 +140,7 @@ const PomodoroTimer = () => {
                         ) : (
                             <Button
                                 onClick={() => setIsRunning(true)}
+                                aria-label="Démarrer le timer"
                                 className="bg-green-500 text-white rounded-full w-16 sm:w-20 h-16 sm:h-20 text-lg sm:text-2xl font-bold shadow-lg border border-green-500 hover:bg-transparent hover:text-green-500 transition-all duration-500"
                             >
                                 Start
