@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 type TimerMode = "WORK" | "SHORT_BREAK" | "LONG_BREAK";
 
@@ -8,12 +9,16 @@ const PomodoroTimer = () => {
     const [i_time_left, setTimeLeft] = useState(25 * 60);
     const [isRunning, setIsRunning] = useState(false);
     const [w_mode, setMode] = useState<TimerMode>("WORK");
+    const [showExtend, setShowExtend] = useState(false);
 
     const durations = {
-        WORK: 25 * 60,
+        WORK: 1 * 60,
         SHORT_BREAK: 5 * 60,
         LONG_BREAK: 15 * 60,
     };
+
+    // Load the audio file
+    const alertSound = new Audio("/sound-end.mp3");
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -46,6 +51,8 @@ const PomodoroTimer = () => {
                     } else {
                         clearInterval(timer!);
                         setIsRunning(false);
+                        setShowExtend(w_mode === "WORK");
+                        alertSound.play();
                         return 0;
                     }
                 });
@@ -55,7 +62,7 @@ const PomodoroTimer = () => {
         return () => {
             if (timer) clearInterval(timer);
         };
-    }, [isRunning]);
+    }, [isRunning, w_mode]);
 
     useEffect(() => {
         const formatTime = (seconds: number) => {
@@ -77,11 +84,19 @@ const PomodoroTimer = () => {
         setMode(newMode);
         setTimeLeft(duration);
         setIsRunning(false);
+        setShowExtend(false);
     };
 
     const sp_reset_timer = () => {
         setTimeLeft(durations[w_mode]);
         setIsRunning(false);
+        setShowExtend(false);
+    };
+
+    const sp_extend_timer = () => {
+        setTimeLeft((prev) => prev + 5 * 60);
+        setIsRunning(true);
+        setShowExtend(false);
     };
 
     return (
@@ -100,10 +115,7 @@ const PomodoroTimer = () => {
                         </div>
                     ))}
                 </div>
-                <h1 className="text-white/90 text-center text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold">
-                    Maîtrisez Votre Temps avec le Pomodoro Timer Ultime
-                </h1>
-                <div className="text-white/90 text-[100px] sm:text-[200px] font-bold">
+                <div className="text-white/90 text-[100px] sm:text-[300px] font-bold">
                     {sp_format_time(i_time_left)}
                 </div>
                 <div className="flex flex-col gap-5">
@@ -128,6 +140,14 @@ const PomodoroTimer = () => {
                                 Start
                             </Button>
                         )}
+                        {showExtend && w_mode === "WORK" && (
+                            <Button
+                                onClick={sp_extend_timer}
+                                className="bg-blue-500 text-white rounded-full text-lg font-bold shadow-lg border border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-500"
+                            >
+                                +5 Minutes
+                            </Button>
+                        )}
                         <Button
                             onClick={sp_reset_timer}
                             className="bg-white/90 text-black/90 rounded-full w-20 sm:w-24 h-16 sm:h-20 text-lg sm:text-2xl font-bold shadow-lg border border-white/90 hover:bg-transparent hover:text-white/90 transition-all duration-500"
@@ -137,7 +157,7 @@ const PomodoroTimer = () => {
                     </div>
                 </div>
                 <p className="text-white/90 text-center text-xs sm:text-sm md:text-md lg:text-lg font-bold transition-all duration-500 cursor-pointer hover:underline">
-                    Qu&apos;est-ce que le Pomodoro Timer ?
+                    <Link href="/about-pomodoro">Qu&apos;est-ce que le Pomodoro Timer ?</Link>
                 </p>
             </div>
         </div>
