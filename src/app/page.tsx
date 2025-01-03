@@ -83,12 +83,11 @@ const PomodoroTimer = () => {
         setTimeLeft(durations[w_mode]);
         setIsRunning(false);
     };
-    
 
     return (
         <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 via-zinc-900 to-black h-screen w-screen">
-            <div className="flex flex-col items-center justify-center h-full w-full p-4 z-10">
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10">
+            <div className="flex flex-col items-center justify-around h-full w-full p-4 z-10">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
                     {["WORK", "SHORT_BREAK", "LONG_BREAK"].map((m) => (
                         <div
                             key={m}
@@ -101,14 +100,17 @@ const PomodoroTimer = () => {
                         </div>
                     ))}
                 </div>
-                <h1 className="text-white/90 text-[100px] sm:text-[200px] md:text-[240px] lg:text-[360px] font-bold my-6 sm:my-8 lg:my-10">
-                    {sp_format_time(i_time_left)}
+                <h1 className="text-white/90 text-center text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold">
+                    Maîtrisez Votre Temps avec le Pomodoro Timer Ultime
                 </h1>
-                <div className="flex flex-col gap-5 sm:flex-row sm:gap-10">
+                <div className="text-white/90 text-[100px] sm:text-[200px] md:text-[240px] lg:text-[360px] font-bold">
+                    {sp_format_time(i_time_left)}
+                </div>
+                <div className="flex flex-col gap-5">
                     <div className="flex items-center justify-center text-white/90 text-xl sm:text-2xl font-bold text-center">
-                        {w_mode === "WORK" && <div>It&apos;s time to work</div>}
-                        {w_mode === "SHORT_BREAK" && <div>It&apos;s time to take a short break</div>}
-                        {w_mode === "LONG_BREAK" && <div>It&apos;s time to take a long break</div>}
+                        {w_mode === "WORK" && <div>C&apos;est le moment de travailler</div>}
+                        {w_mode === "SHORT_BREAK" && <div>C&apos;est le moment de prendre une courte pause</div>}
+                        {w_mode === "LONG_BREAK" && <div>C&apos;est le moment de prendre une longue pause</div>}
                     </div>
                     <div className="flex items-center justify-center gap-4 sm:gap-6">
                         {isRunning ? (
@@ -121,19 +123,22 @@ const PomodoroTimer = () => {
                         ) : (
                             <Button
                                 onClick={() => setIsRunning(true)}
-                                className="bg-white/90 text-black/90 rounded-full w-16 sm:w-20 h-16 sm:h-20 text-lg sm:text-2xl font-bold shadow-lg border border-white/90 hover:bg-transparent hover:text-white/90 transition-all duration-500"
+                                className="bg-green-500 text-white rounded-full w-16 sm:w-20 h-16 sm:h-20 text-lg sm:text-2xl font-bold shadow-lg border border-green-500 hover:bg-transparent hover:text-green-500 transition-all duration-500"
                             >
                                 Start
                             </Button>
                         )}
                         <Button
                             onClick={sp_reset_timer}
-                            className="bg-yellow-500 text-white rounded-full w-20 sm:w-24 h-16 sm:h-20 text-lg sm:text-2xl font-bold shadow-lg border border-yellow-500 hover:bg-transparent hover:text-yellow-500 transition-all duration-500"
+                            className="bg-white/90 text-black/90 rounded-full w-20 sm:w-24 h-16 sm:h-20 text-lg sm:text-2xl font-bold shadow-lg border border-white/90 hover:bg-transparent hover:text-white/90 transition-all duration-500"
                         >
                             Restart
                         </Button>
                     </div>
                 </div>
+                <p className="text-white/90 text-center text-xs sm:text-sm md:text-md lg:text-lg font-bold transition-all duration-500 cursor-pointer hover:underline">
+                    Qu&apos;est-ce que le Pomodoro Timer ?
+                </p>
             </div>
         </div>
     );

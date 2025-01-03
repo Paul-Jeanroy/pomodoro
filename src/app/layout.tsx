@@ -21,15 +21,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Pomodoro Timer | Boost Your Productivity",
+    title: "Pomodoro Timer : Boostez Votre Productivité en Toute Simplicité",
     description:
-        "The ultimate Pomodoro Timer to improve your productivity. Set work sessions, take breaks, and manage your time effectively.",
+        "Gérez votre temps efficacement avec notre application Pomodoro Timer. Technique de travail intelligente, sessions chronométrées et pauses optimales pour maximiser votre concentration.",
     keywords: ["Pomodoro Timer", "Time Management", "Productivity Tool", "Work Timer", "Break Timer"],
     authors: [{ name: "Paul Jeanroy", url: "https://paul-jeanroy.fr" }],
     openGraph: {
-        title: "Pomodoro Timer | Boost Your Productivity",
+        title: "Pomodoro Timer : Boostez Votre Productivité en Toute Simplicité",
         description:
-            "The ultimate Pomodoro Timer to improve your productivity. Set work sessions, take breaks, and manage your time effectively.",
+            "Gérez votre temps efficacement avec notre application Pomodoro Timer. Technique de travail intelligente, sessions chronométrées et pauses optimales pour maximiser votre concentration.",
         url: "https://pomodoro.paul-jeanroy.fr",
         images: [
             {
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Pomodoro Timer | Boost Your Productivity",
+        title: "Pomodoro Timer : Boostez Votre Productivité en Toute Simplicité",
         description:
-            "The ultimate Pomodoro Timer to improve your productivity. Set work sessions, take breaks, and manage your time effectively.",
+            "Gérez votre temps efficacement avec notre application Pomodoro Timer. Technique de travail intelligente, sessions chronométrées et pauses optimales pour maximiser votre concentration.",
         images: ["/pomodoro.webp"],
     },
     robots: {
