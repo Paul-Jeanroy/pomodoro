@@ -21,9 +21,18 @@ jobs:
     - name: Deploy to VPS
       run: |
         ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} << 'EOF'
+          # Navigate to project directory
           cd /var/www/pomodoro
+
+          # Reset local changes and pull the latest code
+          git reset --hard
+          git clean -fd
           git pull origin main
+
+          # Install dependencies and rebuild
           npm install
           npm run build
+
+          # Restart the application with PM2
           pm2 restart pomodoro || pm2 start npm --name "pomodoro" -- start
         EOF
