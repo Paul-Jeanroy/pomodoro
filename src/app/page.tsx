@@ -103,7 +103,7 @@ const PomodoroTimer = () => {
                 <h1 className="text-white/90 text-center text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold">
                     Maîtrisez Votre Temps avec le Pomodoro Timer Ultime
                 </h1>
-                <div className="text-white/90 text-[100px] sm:text-[200px] md:text-[240px] lg:text-[360px] font-bold">
+                <div className="text-white/90 text-[100px] sm:text-[200px] font-bold">
                     {sp_format_time(i_time_left)}
                 </div>
                 <div className="flex flex-col gap-5">

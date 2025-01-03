@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Pomodoro Timer : Boostez Votre Productivité en Toute Simplicité",
     description:
         "Gérez votre temps efficacement avec notre application Pomodoro Timer. Technique de travail intelligente, sessions chronométrées et pauses optimales pour maximiser votre concentration.",
-    keywords: ["Pomodoro Timer", "Time Management", "Productivity Tool", "Work Timer", "Break Timer"],
+    keywords: ["Pomodoro Timer", "Time Management", "Productivity Tool", "Work Timer", "Break Timer", "Pomodoro Technique"],
     authors: [{ name: "Paul Jeanroy", url: "https://paul-jeanroy.fr" }],
     openGraph: {
         title: "Pomodoro Timer : Boostez Votre Productivité en Toute Simplicité",
