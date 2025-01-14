@@ -32,20 +32,13 @@ Welcome to **Pomodoro Timer**, a simple and efficient tool to manage your time a
 ## 📸 Screenshots
 
 ### **Main Timer Screen**
-![image](https://github.com/user-attachments/assets/b6a71b18-6002-4b35-ad00-e0e70c3d9504)
+![image](<img width="1710" alt="image" src="https://github.com/user-attachments/assets/436b1bd7-c6a2-41df-a132-31fa0419280e" />
+)
 
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## 📧 Contact
 
 Created by **Paul Jeanroy**.  
-Visit my website: [paul-jeanroy.fr](https://paul-jeanroy.fr)
-
 Feel free to reach out for collaboration or questions!
