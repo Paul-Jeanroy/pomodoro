@@ -30,7 +30,6 @@ const PomodoroTimer = () => {
             const savedTime = localStorage.getItem("pomodoro-timeLeft");
             const savedRunning = localStorage.getItem("pomodoro-isRunning");
             const savedMode = localStorage.getItem("pomodoro-mode");
-
             if (savedTime) setTimeLeft(parseInt(savedTime));
             if (savedRunning) setIsRunning(savedRunning === "true");
             if (savedMode) setMode(savedMode as TimerMode);
